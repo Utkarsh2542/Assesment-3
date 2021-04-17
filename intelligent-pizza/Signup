@@ -1,0 +1,183 @@
+import React, {Component} from 'react';
+import {Text, 
+StyleSheet, 
+Image, Button, 
+View, SafeAreaView,TextInput,
+TouchableOpacity, Modal,
+TouchableOpacityBase} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+export default class Signup extends Component {
+   constructor(props) {
+    super(props);
+    this.state = {Name: '', Password: ''};
+  }
+  storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem('Name', `${this.state.Name}`);
+      await AsyncStorage.setItem('Password', `${this.state.Password}`);
+    } catch (e) {//error
+    }
+  };
+  Click = () => {
+    this.storeData();
+    this.props.navigation.navigate('Login');
+  };
+goto=()=>{
+    this.props.navigation.navigate('Notes');
+  };
+
+  
+
+  render() {
+    return (
+      <SafeAreaView>
+        <View style={styles.container}>
+        <View style={styles.hh}>
+          <Text style={styles.head}>Sign up         </Text> 
+          <TouchableOpacity
+          onPress={() => this.Click()}
+         >
+          <Text style={styles.head1}>        Login</Text>
+          </TouchableOpacity>
+          </View>
+          <View style={styles.top1}>
+            <Image style={styles.kk} source={require('camera.png')}/>
+             </View>
+          <View style={styles.top}>
+             
+             <TextInput 
+             style={styles.t} 
+             placeholder="Email address"
+             
+          />
+          </View>
+          <View style={styles.top}>
+             
+             <TextInput 
+             style={styles.t} 
+             placeholder="Username"
+             onChangeText={(Name) => this.setState({Name})}
+          />
+          </View>
+          <View style={styles.top}>
+             
+              <TextInput 
+             style={styles.t} 
+             placeholder="Password"
+          />
+         
+          </View>
+          
+          <View style={styles.top}>
+             
+              <TextInput 
+             style={styles.t} 
+             placeholder="Repeat Password"
+             onChangeText={(Password) => this.setState({Password})}
+          />
+         
+          </View>
+          <View style={styles.btn}>
+          <TouchableOpacity
+          onPress={()=> this.goto()}>
+          <Image style={styles.nord} source={require('blue-tick.png')}/>
+           <Text style={styles.b}>SIGN UP</Text>
+           </TouchableOpacity>
+         </View>
+         
+         <Text style={styles.cc}>Terms of service</Text>
+         
+        </View>
+      </SafeAreaView>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+    container: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor:"white",
+    },
+    hh:{
+      flexDirection:"row",
+    },
+    cc:{
+      color:"grey",
+      marginTop:30
+    },
+    head:{
+    fontSize:28,
+    marginTop:20,
+    fontWeight: "bold",
+    },
+     head1:{
+    fontSize:15,
+    color:"grey",
+    marginTop:25,
+    
+    },
+    top:{
+      backgroundColor:"#FFFFFF",
+      borderBottomColor:"lightgrey",
+      borderBottomWidth:1,
+      marginTop:20,
+      width:280,
+      height:50,
+      alignItems:"center",
+      flexDirection:"row",
+      alignContent:"flex-end",
+    },
+    top1:{
+borderRadius:50,
+borderColor:"grey",
+borderWidth:2,
+alignContent:"center",
+justifyContent:"space-around",
+marginTop:15,
+padding:10
+    },
+    iconss:{
+      color:"grey"
+    },
+     icons:{
+      color:"grey",
+      marginLeft:180
+    },
+   b:{
+      color:"blue",
+      marginLeft:30,
+      marginTop:-36
+
+      },
+
+    btn:{
+      marginTop:40,
+      borderColor:'lightgrey',
+      borderWidth:1,
+      borderRadius:15,
+      width:250,
+      height:30,
+      justifyContent:"center",
+      alignContent:"center",
+      alignItems:"center",
+      flexDirection:"row"
+    },
+    bot:{
+      flexDirection:"row",
+    },
+     nord:{
+      height:20,
+      width:20,
+      marginBottom:18
+    },
+    log:{
+      color:"blue"
+    },
+    kk:{height:35,
+    width:35}
+
+
+});
